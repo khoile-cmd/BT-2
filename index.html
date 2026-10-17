@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#163b47">
+    <meta name="description" content="Lên lịch trình du lịch và xem nhanh thời tiết tại điểm đến.">
+    <title>Weather &amp; Travel Planner</title>
+    <link rel="preconnect" href="https://images.unsplash.com">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/script.js" defer></script>
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="page-header">
+        <a class="brand" href="#" aria-label="Weather and Travel Planner - Trang chủ">
+          <span class="brand-mark" aria-hidden="true">✦</span>
+          <span>weather<span class="brand-amp">&amp;</span>travel</span>
+        </a>
+        <p class="header-note">Một chuyến đi đẹp bắt đầu từ một kế hoạch tốt.</p>
+      </header>
+
+      <section class="intro" aria-labelledby="page-title">
+        <p class="eyebrow">YOUR NEXT ADVENTURE</p>
+        <h1 id="page-title">Đi đâu cũng <span>đúng thời điểm.</span></h1>
+        <p class="intro-copy">Theo dõi thời tiết, sắp xếp điểm đến và sẵn sàng cho hành trình tiếp theo.</p>
+      </section>
+
+      <section class="countdown-panel glass-panel" aria-labelledby="countdown-heading">
+        <div class="countdown-copy">
+          <p class="eyebrow">THE JOURNEY BEGINS IN</p>
+          <h2 id="countdown-heading">Đếm ngược ngày khởi hành</h2>
+        </div>
+        <div class="countdown-controls">
+          <label class="visually-hidden" for="departure-date">Chọn ngày khởi hành</label>
+          <input id="departure-date" type="date">
+          <p class="countdown-readout" id="countdown-readout" aria-live="polite">Chọn ngày khởi hành để bắt đầu đếm ngược.</p>
+        </div>
+      </section>
+
+      <div class="app-message" id="app-message" role="status" aria-live="polite" hidden></div>
+
+      <div class="dashboard">
+        <section class="weather-panel glass-panel" aria-labelledby="weather-heading">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">DESTINATION WEATHER</p>
+              <h2 id="weather-heading">Thời tiết điểm đến</h2>
+            </div>
+            <span class="section-icon" aria-hidden="true">⌁</span>
+          </div>
+
+          <label class="field-label" for="city-select">Thành phố</label>
+          <select id="city-select" class="control">
+            <option value="bien-hoa">Biên Hòa</option>
+            <option value="da-lat">Đà Lạt</option>
+            <option value="vung-tau">Vũng Tàu</option>
+            <option value="ha-noi">Hà Nội</option>
+            <option value="da-nang">Đà Nẵng</option>
+            <option value="tp-ho-chi-minh">TP. Hồ Chí Minh</option>
+          </select>
+
+          <article class="weather-card" id="weather-card" data-condition="sunny" aria-live="polite">
+            <div class="weather-card-top">
+              <div>
+                <p class="weather-location" id="weather-city">Biên Hòa</p>
+                <p class="weather-condition" id="weather-condition">Nắng</p>
+              </div>
+              <span class="weather-icon" id="weather-icon" aria-hidden="true">☀️</span>
+            </div>
+            <p class="weather-temperature"><span id="weather-temperature">32</span><span class="temperature-unit">°C</span></p>
+            <div class="weather-details">
+              <div class="weather-detail">
+                <span class="detail-icon" aria-hidden="true">◌</span>
+                <span>Độ ẩm</span>
+                <strong id="weather-humidity">68%</strong>
+              </div>
+              <div class="weather-detail">
+                <span class="detail-icon" aria-hidden="true">⌁</span>
+                <span>Tình trạng</span>
+                <strong id="weather-summary">Nắng</strong>
+              </div>
+            </div>
+          </article>
+
+          <aside class="suggestion-card" aria-labelledby="suggestion-heading">
+            <div class="suggestion-icon" aria-hidden="true">✧</div>
+            <div>
+              <h3 id="suggestion-heading">Gợi ý cho chuyến đi</h3>
+              <p id="smart-suggestion">Trời nóng, nhớ mang kính râm và uống đủ nước nhé.</p>
+            </div>
+          </aside>
+          <p class="weather-disclaimer">Thông tin thời tiết mẫu, không phải dự báo trực tiếp.</p>
+        </section>
+
+        <section class="itinerary-panel glass-panel" aria-labelledby="itinerary-heading">
+          <div class="section-heading itinerary-title-row">
+            <div>
+              <p class="eyebrow">YOUR TRAVEL PLAN</p>
+              <h2 id="itinerary-heading">Lịch trình của bạn</h2>
+            </div>
+            <button class="button button-export" id="export-button" type="button">
+              <span aria-hidden="true">↓</span> Xuất .txt
+            </button>
+          </div>
+
+          <form class="itinerary-form" id="itinerary-form">
+            <div class="form-field">
+              <label class="field-label" for="place-name">Tên địa điểm</label>
+              <input class="control" id="place-name" name="placeName" type="text" maxlength="100" placeholder="Ví dụ: Hồ Tuyền Lâm" required>
+            </div>
+            <div class="form-field">
+              <label class="field-label" for="visit-time">Thời gian ghé thăm</label>
+              <input class="control" id="visit-time" name="visitTime" type="datetime-local" required>
+            </div>
+            <button class="button button-add" type="submit"><span aria-hidden="true">＋</span> Thêm địa điểm</button>
+          </form>
+
+          <div class="list-toolbar" aria-label="Tìm kiếm, lọc và sắp xếp lịch trình">
+            <div class="form-field search-field">
+              <label class="field-label" for="search-place">Tìm địa điểm</label>
+              <input class="control" id="search-place" type="search" placeholder="Nhập tên địa điểm...">
+            </div>
+            <div class="form-field">
+              <label class="field-label" for="status-filter">Trạng thái</label>
+              <select class="control" id="status-filter">
+                <option value="all">Tất cả</option>
+                <option value="visited">Đã đến</option>
+                <option value="not-visited">Chưa đến</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label class="field-label" for="sort-order">Sắp xếp</label>
+              <select class="control" id="sort-order">
+                <option value="name-asc">Tên địa điểm A–Z</option>
+                <option value="name-desc">Tên địa điểm Z–A</option>
+                <option value="time-asc">Thời gian sớm nhất</option>
+                <option value="time-desc">Thời gian muộn nhất</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="itinerary-list" id="itinerary-list" aria-live="polite" aria-relevant="additions removals">
+            <p class="empty-state">Chưa có điểm đến nào. Hãy thêm điểm dừng đầu tiên nhé!</p>
+          </div>
+
+          <div class="pagination">
+            <label class="page-size-label" for="page-size">Hiển thị</label>
+            <select class="control page-size-control" id="page-size" aria-label="Số mục trên mỗi trang">
+              <option value="10">10</option>
+              <option value="20">20</option>
+              <option value="50">50</option>
+              <option value="all">All</option>
+            </select>
+            <span class="page-summary" id="page-summary">0 địa điểm</span>
+            <div class="page-buttons">
+              <button class="button button-page" id="previous-page" type="button" aria-label="Trang trước" disabled>←</button>
+              <span id="page-indicator" aria-live="polite">0 / 0</span>
+              <button class="button button-page" id="next-page" type="button" aria-label="Trang sau" disabled>→</button>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <footer class="page-footer">
+        <span>Made for the places you haven't been yet.</span>
+        <span>Plan lightly. Travel deeply. <span aria-hidden="true">✦</span></span>
+      </footer>
+    </main>
+  </body>
+</html>
